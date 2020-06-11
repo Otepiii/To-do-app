@@ -44,6 +44,7 @@ document.addEventListener("keyup", function (event) {
   }
 });
 
+// add to do
 function addToDo(toDo, id, done, trash) {
   if (trash) {
     return;
@@ -87,3 +88,40 @@ list.addEventListener("click", function(event) {
     removeToDo(element);
   }
 })
+
+
+localStorage.setItem('key', 'value');
+
+let variable = localStorage.getItem('key');
+
+localStorage.setItem("TODO", JSON.stringify(LIST));
+
+let data = localStorage.getItem("TODO");
+
+if(data){
+  LIST = JSON.parse(data);
+  loadToDo(LIST);
+  id = LIST.length;
+
+} else {
+  LIST = [];
+  id = 0;
+}
+
+
+function loadToDo(arary) {
+  array.forEach(item => {
+    addToDo(item.name, item.id, item.done, item.trash)
+  });
+}
+
+clear.addEventListener("click", function(){
+  localStorage.clear();
+  location.reload();
+});
+
+let today = new Date();
+
+let options = { weekday:'long', month: 'short', day: 'numeric'};
+
+dateElement.innerHTML = today.toLocaleDateString("en-us", options)
